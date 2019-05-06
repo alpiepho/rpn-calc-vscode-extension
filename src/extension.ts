@@ -1,48 +1,42 @@
 import * as path from 'path';
 import * as vscode from 'vscode';
 
-const cats = {
-	'Coding Cat': 'https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif',
-	'Compiling Cat': 'https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif',
-	'Testing Cat': 'https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif'
-};
-
 export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(
-		vscode.commands.registerCommand('catCoding.start', () => {
-			CatCodingPanel.createOrShow(context.extensionPath);
+		vscode.commands.registerCommand('rpnHexCalc.start', () => {
+			RpnHexCalcPanel.createOrShow(context.extensionPath);
 		})
 	);
 
 	context.subscriptions.push(
-		vscode.commands.registerCommand('catCoding.doRefactor', () => {
-			if (CatCodingPanel.currentPanel) {
-				CatCodingPanel.currentPanel.doRefactor();
+		vscode.commands.registerCommand('rpnHexCalc.doRefactor', () => {
+			if (RpnHexCalcPanel.currentPanel) {
+				RpnHexCalcPanel.currentPanel.doRefactor();
 			}
 		})
 	);
 
 	if (vscode.window.registerWebviewPanelSerializer) {
 		// Make sure we register a serializer in activation event
-		vscode.window.registerWebviewPanelSerializer(CatCodingPanel.viewType, {
+		vscode.window.registerWebviewPanelSerializer(RpnHexCalcPanel.viewType, {
 			async deserializeWebviewPanel(webviewPanel: vscode.WebviewPanel, state: any) {
 				console.log(`Got state: ${state}`);
-				CatCodingPanel.revive(webviewPanel, context.extensionPath);
+				RpnHexCalcPanel.revive(webviewPanel, context.extensionPath);
 			}
 		});
 	}
 }
 
 /**
- * Manages cat coding webview panels
+ * Manages rpn hex calc webview panels
  */
-class CatCodingPanel {
+class RpnHexCalcPanel {
 	/**
 	 * Track the currently panel. Only allow a single panel to exist at a time.
 	 */
-	public static currentPanel: CatCodingPanel | undefined;
+	public static currentPanel: RpnHexCalcPanel | undefined;
 
-	public static readonly viewType = 'catCoding';
+	public static readonly viewType = 'rpnHexCalc';
 
 	private readonly _panel: vscode.WebviewPanel;
 	private readonly _extensionPath: string;
@@ -54,15 +48,15 @@ class CatCodingPanel {
 			: undefined;
 
 		// If we already have a panel, show it.
-		if (CatCodingPanel.currentPanel) {
-			CatCodingPanel.currentPanel._panel.reveal(column);
+		if (RpnHexCalcPanel.currentPanel) {
+			RpnHexCalcPanel.currentPanel._panel.reveal(column);
 			return;
 		}
 
 		// Otherwise, create a new panel.
 		const panel = vscode.window.createWebviewPanel(
-			CatCodingPanel.viewType,
-			'Cat Coding',
+			RpnHexCalcPanel.viewType,
+			'Rpn Hex Calc',
 			column || vscode.ViewColumn.One,
 			{
 				// Enable javascript in the webview
@@ -73,11 +67,11 @@ class CatCodingPanel {
 			}
 		);
 
-		CatCodingPanel.currentPanel = new CatCodingPanel(panel, extensionPath);
+		RpnHexCalcPanel.currentPanel = new RpnHexCalcPanel(panel, extensionPath);
 	}
 
 	public static revive(panel: vscode.WebviewPanel, extensionPath: string) {
-		CatCodingPanel.currentPanel = new CatCodingPanel(panel, extensionPath);
+		RpnHexCalcPanel.currentPanel = new RpnHexCalcPanel(panel, extensionPath);
 	}
 
 	private constructor(panel: vscode.WebviewPanel, extensionPath: string) {
@@ -123,7 +117,7 @@ class CatCodingPanel {
 	}
 
 	public dispose() {
-		CatCodingPanel.currentPanel = undefined;
+		RpnHexCalcPanel.currentPanel = undefined;
 
 		// Clean up our resources
 		this._panel.dispose();
@@ -141,58 +135,80 @@ class CatCodingPanel {
 		// Vary the webview's content based on where it is located in the editor.
 		switch (this._panel.viewColumn) {
 			case vscode.ViewColumn.Two:
-				this._updateForCat('Compiling Cat');
-				return;
+				this._panel.title = 'Rpn Hex Calc';
+				break;
 
 			case vscode.ViewColumn.Three:
-				this._updateForCat('Testing Cat');
-				return;
+				this._panel.title = 'Rpn Hex';
+				break;
 
 			case vscode.ViewColumn.One:
 			default:
-				this._updateForCat('Coding Cat');
-				return;
+				this._panel.title = 'Rpn Hex Calculator';
+				break;
 		}
+		this._panel.webview.html = this._getHtmlForWebview();
 	}
 
-	private _updateForCat(catName: keyof typeof cats) {
-		this._panel.title = catName;
-		this._panel.webview.html = this._getHtmlForWebview(cats[catName]);
-	}
-
-	private _getHtmlForWebview(catGif: string) {
+	private _getHtmlForWebview() {
 		// Local path to main script run in the webview
-		const scriptPathOnDisk = vscode.Uri.file(
+		const scriptPathOnDisk1 = vscode.Uri.file(
+			path.join(this._extensionPath, 'media', 'popup.css')
+		);
+
+		// And the uri we use to load this script in the webview
+		const scriptUri1 = scriptPathOnDisk1.with({ scheme: 'vscode-resource' });
+
+
+		// Local path to main script run in the webview
+		const scriptPathOnDisk2 = vscode.Uri.file(
+			path.join(this._extensionPath, 'media', 'jquery-3.2.1.slim.min.js')
+		);
+
+		// And the uri we use to load this script in the webview
+		const scriptUri2 = scriptPathOnDisk2.with({ scheme: 'vscode-resource' });
+
+
+		// Local path to main script run in the webview
+		const scriptPathOnDisk3 = vscode.Uri.file(
 			path.join(this._extensionPath, 'media', 'main.js')
 		);
 
 		// And the uri we use to load this script in the webview
-		const scriptUri = scriptPathOnDisk.with({ scheme: 'vscode-resource' });
+		const scriptUri3 = scriptPathOnDisk3.with({ scheme: 'vscode-resource' });
 
 		// Use a nonce to whitelist which scripts can be run
-		const nonce = getNonce();
+		const nonce1 = getNonce();
+		const nonce2 = getNonce();
+		const nonce3 = getNonce();
 
 		return `<!DOCTYPE html>
-            <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-
-                <!--
-                Use a content security policy to only allow loading images from https or from our extension directory,
-                and only allow scripts that have a specific nonce.
-                -->
-                <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src vscode-resource: https:; script-src 'nonce-${nonce}';">
-
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Cat Coding</title>
-            </head>
-            <body>
-                <img src="${catGif}" width="300" />
-                <h1 id="lines-of-code-counter">0</h1>
-
-                <script nonce="${nonce}" src="${scriptUri}"></script>
-            </body>
-            </html>`;
+		<html>
+		  <head>
+			<title>RPM Hex Calculator v0.1</title>
+			<link rel="stylesheet" href="${scriptUri1}"/>
+			<link rel="icon" type="image/x-icon" href="favicon.ico">
+		  </head>
+		  <body>
+			<div class="calc-container">
+			  <p id="title" class="text-font">RPN Hex Calculator</p>
+			  <div class="calc-font" id="calculator"></div>
+			</div>      
+		
+			<div id="about-overlay" class="about-overlay about-hide">
+			  &nbsp;
+			</div>
+			<div id="about" class="about about-hide">
+			  <p >v0.1</p>
+			  <p>A simple Hex calculator that uses reverse polish notation.</p>
+			  <p>Thanks for trying our app!</p>
+			  <p>- "Thatname Group"</p>
+			</div>
+		  </body>
+		  <script type="text/javascript" nonce="${nonce2}" src="${scriptUri2}"></script>
+		  <script nonce="${nonce3}" src="${scriptUri3}"></script>
+		</html>
+		`;
 	}
 }
 

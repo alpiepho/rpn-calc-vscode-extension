@@ -1,8 +1,9 @@
 {
-	"name": "cat-coding",
-	"description": "Cat Coding - A Webview API Sample",
+	"name": "rpn-hex-calc",
+	"description": "Rpn Hex Calc - A Simple reverse polish notation hex calculator",
 	"version": "0.0.1",
-	"publisher": "vscode-samples",
+	"publisher": "Thatname Group",
+	"repository": "https://github.com/alpiepho/rpn-calc-vscode-extension",
 	"engines": {
 		"vscode": "^1.26.0"
 	},
@@ -10,22 +11,22 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:catCoding.start",
-		"onCommand:catCoding.doRefactor",
-		"onWebviewPanel:catCoding"
+		"onCommand:rpnHexCalc.start",
+		"onCommand:rpnHexCalc.doRefactor",
+		"onWebviewPanel:rpnHexCalc"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "catCoding.start",
-				"title": "Start cat coding session",
-				"category": "Cat Coding"
+				"command": "rpnHexCalc.start",
+				"title": "Start Rpn Hex Calculator",
+				"category": "RpnHexCalc"
 			},
 			{
-				"command": "catCoding.doRefactor",
+				"command": "rpnHexCalc.doRefactor",
 				"title": "Do some refactoring",
-				"category": "Cat Coding"
+				"category": "RpnHexCalc"
 			}
 		]
 	},

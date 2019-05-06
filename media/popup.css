@@ -1,0 +1,120 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: large;
+  background: #888;
+}
+
+.calc-font, .button {
+  font-size: 16px;
+}
+
+.calc-container {
+  width: 260px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.text-font {
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: center;
+  color: #ddd;
+}
+
+.results {
+  width: 240px;
+  border: 5px solid rgb(3, 107, 9);
+  background: rgb(8, 216, 60);
+  color: white;
+  padding: 2px;
+}
+
+.result-line {
+  font-family: monospace;
+  font-size: 1.1em;
+  line-height: 0.5em;
+}
+
+.digits-hide {
+  display: none;
+}
+
+.button-container {
+  width: 300px;
+}
+
+.button {
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 6px;
+    cursor: pointer;
+    background-color: #ddd;
+    color: black;
+    border: 5px solid #555;
+    border-radius: 4px;
+}
+
+.button:focus {
+    outline: none;
+}
+
+.button:active {
+  background-color: blue;
+}
+
+.button-active {
+  background-color: blue;
+}
+
+.button:disabled {
+    background: #aaa;
+    color : #C3C3C3;
+    border: 5px solid #555;
+}
+
+.button-single {
+  width: 40px;
+  height: 40px;
+}
+
+.button-double {
+  width: 94px;
+  height: 40px;
+}
+
+.button-triple {
+  width: 144px;
+  height: 40px;
+}
+
+.about-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: gray;
+  opacity: 0.8;
+}
+
+.about-hide {
+  display: none;
+}
+
+.about {
+  position: absolute;
+  top: 70px;
+  left: 30px;
+  width: 210px;
+  height: 300px;
+  border: 2px solid #555555;
+  border-radius: 6px;
+  background-color: white;
+}
+
+.about p {
+  margin-left: 10px;
+}
