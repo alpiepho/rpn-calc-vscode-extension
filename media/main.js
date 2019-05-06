@@ -63,20 +63,33 @@ var opsHexOnly = [
 ///////////////////////////////////////////////////////////
 // LOCAL STORAGE FUNCTIONS
 ///////////////////////////////////////////////////////////
+const vscode = acquireVsCodeApi();
+
 function getFromLocalStorage() {
   try {
-    chrome.storage.local.get(['key'], function(result) {
-      data = JSON.parse(result.key);
-      fmtHex = data['fmtHex'];
-      stack = data['stack'];
-      if (!fmtHex) {
-        formatClick();
-      }
-      showLines();
-    });  
+    data = vscode.getState();
+    fmtHex = data['fmtHex'];
+    stack = data['stack'];
+    if (!fmtHex) {
+      formatClick();
+    }
+    showLines();
   } catch(e) {
-    console.log('chrome.storage.local.get failed. ' + e);
+    console.log('vscode.getState failed. ' + e);
   }
+  // try {
+  //   chrome.storage.local.get(['key'], function(result) {
+  //     data = JSON.parse(result.key);
+  //     fmtHex = data['fmtHex'];
+  //     stack = data['stack'];
+  //     if (!fmtHex) {
+  //       formatClick();
+  //     }
+  //     showLines();
+  //   });  
+  // } catch(e) {
+  //   console.log('chrome.storage.local.get failed. ' + e);
+  // }
 }
 
 function saveToLocalStorage() {
@@ -84,13 +97,22 @@ function saveToLocalStorage() {
   data = {}
   data['fmtHex'] = fmtHex;
   data['stack'] = stack;
-  s = JSON.stringify(data);
   try {
-    chrome.storage.local.set({key: s}, function() {
-    });
-} catch(e) {
-  console.log('chrome.storage.local.set failed. ' + eval);
-}
+    vscode.setState(data);
+  } catch(e) {
+    console.log('vscode.setState failed. ' + eval);
+  }
+  //   s = stack.join(',')
+  //   data = {}
+  //   data['fmtHex'] = fmtHex;
+  //   data['stack'] = stack;
+  //   s = JSON.stringify(data);
+  //   try {
+  //     chrome.storage.local.set({key: s}, function() {
+  //     });
+  // } catch(e) {
+  //   console.log('chrome.storage.local.set failed. ' + eval);
+  // }
 }
 
 ///////////////////////////////////////////////////////////
