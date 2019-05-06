@@ -12,7 +12,6 @@
 	],
 	"activationEvents": [
 		"onCommand:rpnHexCalc.start",
-		"onCommand:rpnHexCalc.doRefactor",
 		"onWebviewPanel:rpnHexCalc"
 	],
 	"main": "./out/extension.js",
@@ -21,11 +20,6 @@
 			{
 				"command": "rpnHexCalc.start",
 				"title": "Start Rpn Hex Calculator",
-				"category": "RpnHexCalc"
-			},
-			{
-				"command": "rpnHexCalc.doRefactor",
-				"title": "Do some refactoring",
 				"category": "RpnHexCalc"
 			}
 		]

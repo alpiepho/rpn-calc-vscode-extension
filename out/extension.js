@@ -14,11 +14,6 @@ function activate(context) {
     context.subscriptions.push(vscode.commands.registerCommand('rpnHexCalc.start', () => {
         RpnHexCalcPanel.createOrShow(context.extensionPath);
     }));
-    context.subscriptions.push(vscode.commands.registerCommand('rpnHexCalc.doRefactor', () => {
-        if (RpnHexCalcPanel.currentPanel) {
-            RpnHexCalcPanel.currentPanel.doRefactor();
-        }
-    }));
     if (vscode.window.registerWebviewPanelSerializer) {
         // Make sure we register a serializer in activation event
         vscode.window.registerWebviewPanelSerializer(RpnHexCalcPanel.viewType, {
