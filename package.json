@@ -2,7 +2,7 @@
 	"name": "rpn-hex-calc",
 	"description": "Rpn Hex Calc - A Simple reverse polish notation hex calculator",
 	"version": "0.0.1",
-	"publisher": "Thatname Group",
+	"publisher": "thatnamegroup",
 	"repository": "https://github.com/alpiepho/rpn-calc-vscode-extension",
 	"engines": {
 		"vscode": "^1.26.0"
