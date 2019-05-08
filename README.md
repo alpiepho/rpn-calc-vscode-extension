@@ -7,7 +7,7 @@ from a Chrome Extension I wrote earlier (https://github.com/alpiepho/rpn-calc-ch
 Run the `RpnHexCalc: Start Rpn Hex Calculator` to create the webview for the calculator.
 
 ## Screenshots
-<img src="/releases/screenshots/image3.png" width="200"> <img src="/releases/screenshots/image4.png" width="200">
+<img src="/images/image3.png" width="200"> <img src="/images/image4.png" width="200">
 
 
 ## Running in debug mode
