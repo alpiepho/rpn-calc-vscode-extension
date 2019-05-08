@@ -1,7 +1,7 @@
 {
 	"name": "rpn-hex-calc",
 	"description": "Rpn Hex Calc - A Simple reverse polish notation hex calculator",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"publisher": "thatnamegroup",
 	"repository": {
 		"type": "git",
