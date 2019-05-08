@@ -3,9 +3,20 @@
 	"description": "Rpn Hex Calc - A Simple reverse polish notation hex calculator",
 	"version": "0.0.1",
 	"publisher": "thatnamegroup",
-	"repository": "https://github.com/alpiepho/rpn-calc-vscode-extension",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/alpiepho/rpn-calc-vscode-extension"
+	},
+	"author": {
+		"name": "Thatname Group"
+	},
+	"icon": "images/icon_128X128.png",
 	"engines": {
 		"vscode": "^1.26.0"
+	},
+	"galleryBanner": {
+		"color": "#CFB69A",
+		"theme": "light"
 	},
 	"categories": [
 		"Other"

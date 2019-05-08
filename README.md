@@ -1,7 +1,14 @@
 # Rpn Hex Calc - A Simple reverse polish notation hex calculator
 
 This a VS Code extension that displays an RPN Hex calculator.  This was leveraged
-from a Chrome Extension I wrote earlier (https://github.com/alpiepho/rpn-calc-chrome-extension).
+from a Chrome Extension I wrote earlier (https://github.com/alpiepho/rpn-calc-chrome-extension)
+...Look for it soon in the Chrome Store.
+
+Run the `RpnHexCalc: Start Rpn Hex Calculator` to create the webview for the calculator.
+
+## Screenshots
+<img src="/releases/screenshots/image3.png" width="200"> <img src="/releases/screenshots/image4.png" width="200">
+
 
 ## Running in debug mode
 
@@ -22,4 +29,4 @@ https://code.visualstudio.com/api/extension-guides/webview
 
 ## Market Place
 
-Your extension will live at https://marketplace.visualstudio.com/items?itemName=thatnamegroup.rpn-hex-calc 
+You can find this extension at https://marketplace.visualstudio.com/items?itemName=thatnamegroup.rpn-hex-calc 
